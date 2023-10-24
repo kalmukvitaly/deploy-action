@@ -20,7 +20,7 @@ tar cjvf /tmp/workspace.tar.bz2 --exclude .git .
 log "Launching ssh agent."
 eval `ssh-agent -s`
 
-remote_command="set -e ; log() { echo '>> [remote]' \$@ ; } ; cleanup() { log 'Removing workspace...'; rm -rf \"\$HOME/$PROJECT_NAME\" ; } ; log 'Creating workspace directory...' ; mkdir -p \"\$HOME/$PROJECT_NAME\" ; trap cleanup EXIT ; log 'Unpacking workspace...' ; tar -C \"\$HOME/$PROJECT_NAME\" -xjv ; ls ; sh deploy.sh ;"
+remote_command="set -e ; log() { echo '>> [remote]' \$@ ; } ; cleanup() { log 'Removing workspace...'; rm -rf \"\$HOME/$PROJECT_NAME\" ; } ; ls -a ; log 'Creating workspace directory...' ; mkdir -p \"\$HOME/$PROJECT_NAME\" ; trap cleanup EXIT ; log 'Unpacking workspace...' ; tar -C \"\$HOME/$PROJECT_NAME\" -xjv ; ls -a ; sh deploy.sh ;"
 
 ssh-add <(echo "$SSH_PRIVATE_KEY")
 
