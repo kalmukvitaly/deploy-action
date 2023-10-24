@@ -1,0 +1,28 @@
+name: SSH-Compose
+description: SSH into host and deploy repository with Docker-Compose
+inputs:
+  ssh_private_key:
+    description: Private SSH key used for logging into remote system.
+    required: true
+  ssh_host:
+    description: Remote host name.
+    required: true
+  ssh_port:
+    description: Remote SSH port.
+    default: 22
+    required: true
+  ssh_user:
+    description: Remote user name.
+    required: true
+  project_name:
+    description: Project name
+    required: true
+runs:
+  using: docker
+  image: Dockerfile
+  env:
+    SSH_USER: ${{ inputs.ssh_user }}
+    SSH_HOST: ${{ inputs.ssh_host }}
+    SSH_PORT: ${{ inputs.ssh_port }}
+    SSH_PRIVATE_KEY: ${{ inputs.ssh_private_key }}
+    PROJECT_NAME: ${{ inputs.project_name }}
